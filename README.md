@@ -9,33 +9,37 @@ Elle permet la création, la mise à jour, la consultation et la fermeture de ti
 - SQLAlchemy (SQLite)
 - Pydantic v2
 - Pytest
-- Docker
+- Docker 
 
 ## Installation et démarrage
 # Installation
+```
 python3.10 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-
+```
 # Configuration
 Créer un fichier `.env` à la racine du projet avec les variables suivantes :
+```
 APP_NAME=Ticket API
 APP_DESCRIPTION=API de gestion de tickets
-DEBUG=True
+DEBUG=True 
 HOST=0.0.0.0 # Adresse d’écoute du serveur
 PORT=8000 # Port d’exposition de l’API
-DATABASE_URL=sqlite+pysqlite:///:memory:
-
+DATABASE_URL=sqlite+pysqlite:///:memory: 
+```
 # Lancement
 uvicorn app.main:app --reload
 # Lancement Docker
+```
 docker build -t ticket-api .
 docker run -d -p 8000:8000 --name ticket-api ticket-api
-
+```
 ## Documentation Swagger
 http://127.0.0.1:8000/docs
 
 ## Structure
+```
 ├── app/                # Code principal de l’application
 │   ├── api/            # Routes FastAPI
 │   ├── core/           # Middleware, exceptions, logging
@@ -47,11 +51,11 @@ http://127.0.0.1:8000/docs
 │   ├── config.py       # Paramètres et lecture du fichier .env
 │   └── main.py         # Point d’entrée FastAPI
 ├── tests/              # Tests unitaires Pytest
-├── Dockerfile          # Image Docker de l’application
+├── Dockerfile          # Image Docker
 ├── requirements.txt    # Dépendances Python
 ├── .env                # Variables d’environnement
 └── README.md           # Documentation du projet
-
+```
 
 ## Endpoints
 Méthode | URL | Description
@@ -158,17 +162,22 @@ curl http://127.0.0.1:8000/tickets/?page=1&per_page=10
 ## Base de données
 - SQLite en mémoire via SQLAlchemy  
 - Schéma : Ticket(id, title, description, status, created_at)  
-- COUNT() utilisé pour la pagination
+- COUNT() utilisé pour la pagination 
   - En production : remplacer par une estimation ou un cache (PostgreSQL/Redis)  
 - Index en production :  
   - CREATE INDEX idx_tickets_status ON tickets(status);
   - CREATE INDEX idx_tickets_created_at ON tickets(created_at);
 
 ## Tests
+```
 pytest -v
+pytest --cov=app -v
+```
 -Tests Couverture :
 - CRUD complet  
 - Pagination  
 - Validation et XSS  
 - Ticket inexistant (404)  
 - Temps de réponse < 200 ms (middleware)
+
+
