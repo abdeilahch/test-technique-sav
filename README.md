@@ -17,6 +17,7 @@ Elle permet la création, la mise à jour, la consultation et la fermeture de ti
 python3.10 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+
 ```
 # Configuration
 Créer un fichier `.env` à la racine du projet avec les variables suivantes :
