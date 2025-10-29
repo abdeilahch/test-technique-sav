@@ -14,8 +14,8 @@ async def lifespan(app: FastAPI):
 def create_app() -> FastAPI:
     app = FastAPI(
         title=settings.APP_NAME,
-        version="1.0.0",
-        description="API de gestion de tickets",
+        description=settings.APP_DESCRIPTION,
+        version=settings.APP_VERSION,
         debug=settings.DEBUG,
         lifespan=lifespan,
     )
