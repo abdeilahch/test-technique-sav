@@ -44,7 +44,6 @@ def close_ticket(db: Session, ticket_id: int):
     if not ticket:
         return None
     ticket.status = "closed"
-    ticket.updated_at = datetime.utcnow()
     db.commit()
     db.refresh(ticket)
     return ticket
