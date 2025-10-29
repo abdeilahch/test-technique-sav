@@ -5,6 +5,7 @@ class Settings(BaseSettings):
     APP_NAME: str
     APP_DESCRIPTION: str
     DEBUG: bool
+    APP_VERSION: str 
     DATABASE_URL: str
     HOST: str
     PORT: int
